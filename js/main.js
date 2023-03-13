@@ -27,7 +27,7 @@ function fetchData(url) {
 fetchData(tracklist)
 */
 
-fetch('/data/playlist.json')
+fetch('../data/playlist.json')
     .then((res) => res.json())
     .then((json) => {
         trackData = json
