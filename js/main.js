@@ -67,10 +67,13 @@ let displayTracks = _ => {
         <div class="header">
             <h1><span class="red">RIDDIMLE.</span> <span class="smol">Guess that riddim track!!!™</span></h1>
         </div>
-        <div class="button">
-                <audio controls autoplay name="media" id="clip">
-                    <source src="${selected[luckyTrack].clip}" type="audio/mpeg">
-                </audio>
+        <div class="buttons">
+            <div onClick="playTrack()" class="playButtons play button">
+                PLAY
+            </div>
+            <div onClick="displayTracks()" class="button next">
+                NEXT
+            </div>
         </div>
     </header>
     `
@@ -81,20 +84,42 @@ let displayTracks = _ => {
             <div class="tracks" onClick="pickTrack(${track})" data-track="${track}">
                 <div class="tracks-image" style="background-image: url(${selected[track].image})">
                 </div>
-                <h3>${selected[track].name}</h3>
-                <h4>${selected[track].artists}</h4>
+                <div class="track-name">
+                    <h3>${selected[track].name}</h3>
+                    <h4>${selected[track].artists}</h4>
+                </div>
             </div>
         `
     }
     display += `</main>`
 
+    display += `
+        <nav>
+            <div onClick="playTrack()" class="playButtons play button">
+                PLAY
+            </div>
+            <div onClick="displayTracks()" class="button next">
+                NEXT
+            </div>
+        <nav>
+        <audio controls name="media" id="clip" hidden>
+            <source src="${selected[luckyTrack].clip}" type="audio/mpeg">
+        </audio>
+    `
+
     document.querySelector("body").innerHTML = display
+
+    
+    document.querySelector("#clip").pause()
 }
 
 function pickTrack(track) {
     document.querySelectorAll(".tracks").forEach(div => div.classList.add("non"))
     document.querySelector(`div[data-track="${luckyTrack}"]`).classList.add("correct")
-    if (track != luckyTrack) document.querySelector(`div[data-track="${track}"]`).classList.add("incorrect")
+    if (track != luckyTrack) {
+        document.querySelector(`div[data-track="${track}"]`).classList.add("incorrect")
+        document.querySelector(`div[data-track="${luckyTrack}"]`).classList.add("anyway")
+    }
 }
 
 function shuffleArray(array) {
@@ -102,4 +127,21 @@ function shuffleArray(array) {
         const j = Math.floor(Math.random() * (i + 1));
         [array[i], array[j]] = [array[j], array[i]];
     }
+}
+
+function playTrack() {
+    let audioPlayer = document.querySelector("#clip")
+    let buttons = document.querySelectorAll(".playButtons")
+
+    audioPlayer.loop = true
+    
+    if (audioPlayer.paused) {
+        audioPlayer.play()
+        buttons.forEach(x => x.innerHTML = "STOP")
+        return
+    }
+
+    audioPlayer.pause()
+    buttons.forEach(x => x.innerHTML = "PLAY")
+
 }
