@@ -75,7 +75,7 @@ let displayTracks = _ => {
             </div>
             <div onClick="displayTracks()" class="button next">
                 NEXT
-                <img src="../img/arrow-right.svg" class="button-icon" />
+                <img src="./img/arrow-right.svg" class="button-icon" />
             </div>
         </div>
     </header>
@@ -100,11 +100,11 @@ let displayTracks = _ => {
         <nav>
             <div onClick="playTrack()" class="playButtons play button">
                 PLAY
-                <img src="../img/play.svg" class="button-icon" />
+                <img src="./img/play.svg" class="button-icon" />
             </div>
             <div onClick="displayTracks()" class="button next">
                 NEXT
-                <img src="../img/arrow-right.svg" class="button-icon" />
+                <img src="./img/arrow-right.svg" class="button-icon" />
             </div>
         <nav>
         <audio controls name="media" id="clip" hidden>
