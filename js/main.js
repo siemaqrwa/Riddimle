@@ -71,7 +71,7 @@ let displayTracks = _ => {
             <div style="flex: 10"></div>
             <div onClick="playTrack()" class="playButtons play button">
                 PLAY
-                <img src="../img/play.svg" class="button-icon" />
+                <img src="./img/play.svg" class="button-icon" />
             </div>
             <div onClick="displayTracks()" class="button next">
                 NEXT
@@ -145,7 +145,7 @@ function playTrack() {
         audioPlayer.play()
         buttons.forEach(x => x.innerHTML = `
         STOP
-        <img src="../img/pause.svg" class="button-icon" />
+        <img src="./img/pause.svg" class="button-icon" />
         `)
         return
     }
@@ -153,7 +153,7 @@ function playTrack() {
     audioPlayer.pause()
     buttons.forEach(x => x.innerHTML = `
     PLAY
-    <img src="../img/play.svg" class="button-icon" />
+    <img src="./img/play.svg" class="button-icon" />
     `)
 
 }
