@@ -238,12 +238,36 @@ nav {
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    font-weight: 700;
+    overflow: hidden;
+    flex: 1;
 }
 
 .button.play {
-    background-image: linear-gradient(to bottom, #3e722e, #275a19);
+    background-image: linear-gradient(to bottom, #485592, #2a3877);
 }
 
 .button.next {
     background-image: linear-gradient(to bottom, #646464, #555555);
+    margin: 16px 0;
+    padding: 16px 0;
+    flex: 0;
+    transition: all .3s ease-in-out;
+}
+
+.button.next.active {
+    flex: 1;
+    margin: 16px;
+    padding: 16px 32px;
+}
+
+.button .button-icon {
+    display: inline;
+    height: 1em;
+    margin-left: 1rem;
+}
+
+.button.next .button-icon {
+    margin-left: 1rem;
+    margin-right: 0rem;
 }

@@ -68,11 +68,14 @@ let displayTracks = _ => {
             <h1><span class="red">RIDDIMLE.</span> <span class="smol">Guess that riddim track!!!™</span></h1>
         </div>
         <div class="buttons">
+            <div style="flex: 10"></div>
             <div onClick="playTrack()" class="playButtons play button">
                 PLAY
+                <img src="../img/play.svg" class="button-icon" />
             </div>
             <div onClick="displayTracks()" class="button next">
                 NEXT
+                <img src="../img/arrow-right.svg" class="button-icon" />
             </div>
         </div>
     </header>
@@ -97,9 +100,11 @@ let displayTracks = _ => {
         <nav>
             <div onClick="playTrack()" class="playButtons play button">
                 PLAY
+                <img src="../img/play.svg" class="button-icon" />
             </div>
             <div onClick="displayTracks()" class="button next">
                 NEXT
+                <img src="../img/arrow-right.svg" class="button-icon" />
             </div>
         <nav>
         <audio controls name="media" id="clip" hidden>
@@ -115,6 +120,7 @@ let displayTracks = _ => {
 
 function pickTrack(track) {
     document.querySelectorAll(".tracks").forEach(div => div.classList.add("non"))
+    document.querySelectorAll(".button.next").forEach(div => div.classList.add("active"))
     document.querySelector(`div[data-track="${luckyTrack}"]`).classList.add("correct")
     if (track != luckyTrack) {
         document.querySelector(`div[data-track="${track}"]`).classList.add("incorrect")
@@ -137,11 +143,17 @@ function playTrack() {
     
     if (audioPlayer.paused) {
         audioPlayer.play()
-        buttons.forEach(x => x.innerHTML = "STOP")
+        buttons.forEach(x => x.innerHTML = `
+        STOP
+        <img src="../img/pause.svg" class="button-icon" />
+        `)
         return
     }
 
     audioPlayer.pause()
-    buttons.forEach(x => x.innerHTML = "PLAY")
+    buttons.forEach(x => x.innerHTML = `
+    PLAY
+    <img src="../img/play.svg" class="button-icon" />
+    `)
 
 }
