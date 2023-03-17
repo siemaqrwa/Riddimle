@@ -1,31 +1,8 @@
-// let token = 'BQBbYZWgi1HueL_a7AC7kDypFaro78Ju0JjpR_uo38YxXkKVeHrNcjcjI8bJD8ZoKPDpb1hM-UAPFDlm_l0Fwz2zlOu6i8IITb9oZpYRMnHmZ3EeV5put9KPdmZ6Tl9_ah8-xMDl3U618XtNnzyfNN6q8JcsVacwArzdeIMBoSOKpgNy4w'
-let tracks = []
 let tokenType = null
 let tracklist = 'https://api.spotify.com/v1/playlists/2hqzHolqMog8xEuGyeykNL/tracks'
 let trackData = []
 let luckyTrack = null
-/*
-function fetchData(url) {
-    fetch(url, {
-                method: 'GET', headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                }
-            })
-                .then((response) => {
-                    console.log(response.json().then(
-                        (data) => { 
-                            console.log(data)
-                            tracks = [...tracks, ...data.items]
-                            data.next ? fetchData(data.next) : displayTracks() 
-                        }
-                    ));
-                });
-}
-
-fetchData(tracklist)
-*/
+let streak = 0
 
 fetch('./data/playlist.json')
     .then((res) => res.json())
@@ -36,23 +13,7 @@ fetch('./data/playlist.json')
 
 let displayTracks = _ => {
     let display = ""
-    /*
-    let trackData = tracks.filter(e => e.track.available_markets.includes("PL")).map(e => (
-        {
-            image: e.track.album.images[0].url,
-            artists: e.track.artists.map(e => e.name).join(", "),
-            name: e.track.name,
-            clip: e.track.preview_url
-    }))
 
-    console.log(trackData.map(e=> `{
-        "image": "${e.image}",
-        "artists": "${e.artists}",
-        "name": "${e.name}",
-        "clip": "${e.clip}"
-    }`).join(", "))
-
-    */
 
     shuffleArray(trackData)
 
@@ -125,7 +86,11 @@ function pickTrack(track) {
     if (track != luckyTrack) {
         document.querySelector(`div[data-track="${track}"]`).classList.add("incorrect")
         document.querySelector(`div[data-track="${luckyTrack}"]`).classList.add("anyway")
+        displayStreak()
+        streak = 0
+        return
     }
+    streak += 1
 }
 
 function shuffleArray(array) {
@@ -155,5 +120,19 @@ function playTrack() {
     PLAY
     <img src="./img/play.svg" class="button-icon" />
     `)
+}
 
+function displayStreak() {
+
+    document.querySelector("body").innerHTML += `
+        <div class="popout-container">
+            <div class="popout">Your steak ends!
+            ${
+                streak == 0 ? "You get zero points :c" :
+                streak == 1 ? "You've guessed 1 track!" :
+                "You've guessed " + streak + " tracks!"
+            }
+            </div>
+        </div>
+    `
 }

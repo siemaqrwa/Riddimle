@@ -271,3 +271,50 @@ nav {
     margin-left: 1rem;
     margin-right: 0rem;
 }
+
+.popout-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: popout 5s ease-in-out forwards;
+    pointer-events: none;
+}
+
+@media screen and (max-width: 720px) {
+    .popout-container {
+        bottom: auto;
+        top: 0;
+        animation: popout-mobile 5s ease-in-out forwards;
+    }
+}
+
+.popout {
+    margin: 1em;
+    padding: 1em;
+    background: rgb(20,20,20);
+    border-radius: 9999px;
+}
+
+@keyframes popout {
+    0%, 100% {
+        transform: translateY(100%);
+    }
+
+    10%, 90% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes popout-mobile {
+    0%, 100% {
+        transform: translateY(-100%);
+    }
+
+    10%, 90% {
+        transform: translateY(0);
+    }
+}
